@@ -6,10 +6,7 @@ def list_sg_in_vpc(account, region, vpc_id):
 
     # Use the describe_security_groups method to retrieve information about security groups in the specified VPC
     response = ec2_client.describe_security_groups(Filters=[{'Name': 'vpc-id', 'Values': [vpc_id]}])
-    security_groups = {}
-    for sg in response['SecurityGroups']:
-        security_groups[sg['GroupId']] = sg
-    return security_groups
+    return {sg['GroupId']: sg for sg in response['SecurityGroups']}
 
 def sg_populate(accounts):
     for description, account in accounts.items():

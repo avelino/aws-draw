@@ -6,10 +6,7 @@ def list_subnets_in_vpc(account, region, vpc_id):
 
     # Use the describe_subnets method to retrieve information about subnets in the specified VPC
     response = ec2_client.describe_subnets(Filters=[{'Name': 'vpc-id', 'Values': [vpc_id]}])
-    subnets = {}
-    for subnet in response['Subnets']:
-        subnets[subnet['SubnetId']] = subnet
-    return subnets
+    return {subnet['SubnetId']: subnet for subnet in response['Subnets']}
 
 def subnets_populate(accounts):
     for description, account in accounts.items():

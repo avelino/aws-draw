@@ -6,10 +6,7 @@ def list_vpcs_in_region(account, region):
 
     # Use the describe_vpcs method to retrieve information about all VPCs
     response = ec2_client.describe_vpcs()
-    vpcs = {}
-    for vpc in response['Vpcs']:
-        vpcs[vpc['VpcId']] = vpc
-    return vpcs
+    return {vpc['VpcId']: vpc for vpc in response['Vpcs']}
 
 def vpcs_populate(accounts):
     for description, account in accounts.items():

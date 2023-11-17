@@ -8,9 +8,6 @@ def client(account, service, region='us-east-1'):
         aws_secret_access_key=account['access_key'],
         aws_session_token=account['session_token']
     )
-    
-    # Create a client for the EC2 service
-    client = session.client(service)
-    
-    return client
+
+    return session.client(service)
 

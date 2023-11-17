@@ -3,8 +3,7 @@ import botocore
 
 def get_id(account):
     sts_client = client(account, 'sts')
-    account_id = sts_client.get_caller_identity().get('Account')
-    return account_id
+    return sts_client.get_caller_identity().get('Account')
 
 def get_name(account, organization_account):
     org_client = client(organization_account, 'organizations')
