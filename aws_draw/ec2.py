@@ -8,8 +8,7 @@ def list_ec2_instances_in_subnet(account, region, subnet_id):
     response = ec2_client.describe_instances(Filters=[{'Name': 'subnet-id', 'Values': [subnet_id]}])
     instances = []
     for reservation in response['Reservations']:
-        for instance in reservation['Instances']:
-            instances.append(instance)
+        instances.extend(iter(reservation['Instances']))
     return instances
 
 def ec2_populate(accounts):
